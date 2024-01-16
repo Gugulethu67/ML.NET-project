@@ -1,0 +1,49 @@
+﻿@model Team21.MLModel.ModelInput
+@{
+    ViewData["Title"] = "Predict";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Stock Prediction Model for Cogent</h1>
+<hr/>
+@if(ViewBag.Result != null){
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Prediction: @ViewBag.Result.Score</h4>
+        </div>
+    </div>
+    <hr />
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Predict">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="ProductID" class="control-label"></label>
+                    <input asp-for="ProductID" class="form-control"/>
+                    <span asp-validation-for="ProductID" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="ProductName" class="control-label"></label>
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Temperature" class="control-label"></label>
+                    <input asp-for="Temperature" class="form-control" />
+                    <span asp-validation-for="Temperature" class="text-danger"></span>
+                </div>               
+            </div>
+            <div class="form-group text-right">
+                <input type="submit" value="Predict" class="btn btn-primary"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
